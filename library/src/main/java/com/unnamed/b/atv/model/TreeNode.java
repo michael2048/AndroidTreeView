@@ -80,7 +80,24 @@ public class TreeNode {
     public List<TreeNode> getChildren() {
         return Collections.unmodifiableList(children);
     }
+    
+    public TreeNode getLastChildren() {
+        if (children.size() == 0) {
+            return null;
+        } else {
+            return children.get(children.size() - 1);
+        }
+    }
 
+    public TreeNode getLastByLevelChildren(int mLevel) {
+        TreeNode lastChild = this;
+        while (mLevel > 0 && lastChild.getParent() != null) {
+            lastChild = lastChild.getLastChildren();
+            mLevel--;
+        }
+        return lastChild;
+    }
+    
     public int size() {
         return children.size();
     }
